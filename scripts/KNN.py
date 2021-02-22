@@ -50,14 +50,14 @@ class KNN:
         self.y_train = _y
 
     def predict(self, x_test):
-        predicted_labels = [self.predict_labels(x) for x in x_test]
+        predicted_labels = [self.predict_labels(x)
+                            for x in x_test]
         return np.array(predicted_labels)
 
     def predict_labels(self, point1):
-        # We try to get the smallest Euclidean distance and based
-        # on the number of smaller distances we perform our
-        # calculation.
-        distances_List = [euclidean_distances(point1, point2) for point2 in self.X_train]
+        # Calculate the Euclidean distance
+        distances_List = [euclidean_distances(point1, point2)
+                          for point2 in self.X_train]
         
         """
         Once the distance of a new observation from the points in
