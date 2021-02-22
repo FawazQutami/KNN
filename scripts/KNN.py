@@ -49,15 +49,15 @@ class KNN:
         """
         self.k = k
 
-    def fit(self, _X, _y):
+    def fit(self, _X_train, _y_train):
         """ Fitting Data """
-        self.X_train = _X
-        self.y_train = _y
+        self.X_train = _X_train
+        self.y_train = _y_train
 
-    def predict(self, x_test):
+    def predict(self, _X_test):
         """ Predict the classes of the test data """
         predicted_labels = [self.predict_labels(x)
-                            for x in x_test]
+                            for x in _X_test]
         return np.array(predicted_labels)
 
     def predict_labels(self, point1):
@@ -85,9 +85,9 @@ class KNN:
         return most_common_label[0][0]
 
 
-def accuracy(y_test, y_prediction):
+def accuracy(_y_test, _prediction):
     """ Calculate the Accurecy """
-    acc = np.sum(y_test == y_prediction) / len(y_test)
+    acc = np.sum(_y_test == _prediction) / len(_y_test)
     return acc
 
 
