@@ -1,12 +1,6 @@
 # File: KNN.py
 
-"""
-   KNN: K Nearest Neighbor.
-   KNN is one of the simplest forms of machine learning
-   algorithms mostly used for classification.
-   We can use KNN if the dataset is small, well-labeled,
-   and noise-free.
-"""
+
 
 import numpy as np
 from collections import Counter
@@ -26,6 +20,7 @@ from matplotlib.colors import ListedColormap
         3. Hamming distance (for categorical).
     """
 def euclidean_distances(point1, point2):
+    """ Euclidean Distance """
     """
     We usually use Euclidean distance to calculate the nearest
     neighbor. If we have two points (x1, y1) and (x2, y2). 
@@ -36,6 +31,15 @@ def euclidean_distances(point1, point2):
 
 
 class KNN:
+    """
+       KNN: K Nearest Neighbor Algorithm.
+           Knn is simple to implement and mostly used for classification.
+           Knn is easy to interpret.
+           Knn for large datasets requires a lot of memory and gets slow
+               to predict because of distance calculations
+           Knn accuracy can be broken down if there are many predictors
+           Knn doesn't generate insights
+    """
 
     def __init__(self, k=3):
         """
@@ -46,15 +50,18 @@ class KNN:
         self.k = k
 
     def fit(self, _X, _y):
+        """ Fitting Data """
         self.X_train = _X
         self.y_train = _y
 
     def predict(self, x_test):
+        """ Predict the classes of the test data """
         predicted_labels = [self.predict_labels(x)
                             for x in x_test]
         return np.array(predicted_labels)
 
     def predict_labels(self, point1):
+        """ Predict the common class for a point """
         # Calculate the Euclidean distance
         distances_List = [euclidean_distances(point1, point2)
                           for point2 in self.X_train]
@@ -74,10 +81,12 @@ class KNN:
         k_index_labels = [self.y_train[i] for i in k_index]    
         # Get the most common class - the final outcome
         most_common_label = Counter(k_index_labels).most_common(1)
+        
         return most_common_label[0][0]
 
 
 def accuracy(y_test, y_prediction):
+    """ Calculate the Accurecy """
     acc = np.sum(y_test == y_prediction) / len(y_test)
     return acc
 
@@ -97,11 +106,14 @@ if __name__ == '__main__':
     iris = datasets.load_iris()
     X, y = iris.data, iris.target
 
+    draw_plot(X, y)
+    
     X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                         test_size=0.2,
                                                         random_state=1234)
 
-    K = 5
+    
+    K = 3
     """
     Choosing the right value of K is called parameter tuning and 
     it’s necessary for better results.
@@ -112,6 +124,7 @@ if __name__ == '__main__':
     clf = KNN(k=K)
     clf.fit(X_train, y_train)
     predictions = clf.predict(X_test)
+
     print("KNN Accuracy is: ", accuracy(y_test, predictions))
 
-    draw_plot(X, y)
+    
