@@ -20,7 +20,7 @@
         2. Manhattan (for continuous) and
         3. Hamming distance (for categorical).
 	
-## Somthing to know:
+## Somthing to know about KNN:
     1. It is simple to implement and mostly used for classification.
     2. It is easy to interpret.
     3. Large datasets requires a lot of memory and gets slow
