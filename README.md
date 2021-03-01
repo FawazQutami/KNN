@@ -2,7 +2,7 @@
 	K represents the number of the nearest neighbors
         that we used to classify new data points.
 	
-	## KNN Algorithm:
+## KNN Algorithm:
 		1. Load the data
 		2. Initialize K - number of neighbors: Choosing the right value of K is called parameter tuning and 
 			it’s necessary for better results:
@@ -19,7 +19,7 @@
 				1. Find the associated labels of the returned K indexs
 				2. Get the most common class - the final outcome
 		
-	## Distance Calculation Methods:
+## Distance Calculation Methods:
 	There are various methods for calculating the distance
     between the points, of which the most commonly known
     methods are –
@@ -27,7 +27,7 @@
         2. Manhattan (for continuous) and
         3. Hamming distance (for categorical).
 	
-	## Somthing to know about KNN:
+## Somthing to know about KNN:
 		1. It is simple to implement and mostly used for classification.
 		2. It is easy to interpret.
 		3. Large datasets requires a lot of memory and gets slow
