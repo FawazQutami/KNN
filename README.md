@@ -22,8 +22,9 @@
 	There are various methods for calculating the distance between the points, of which the most commonly known
     methods are –
         1. Euclidean,
-        2. Manhattan (for continuous) and
-        3. Hamming distance (for categorical).
+        2. Manhattan, 
+        3. Minkowski, and
+        3. Hamming distance (for categorical)
 	
 ## Somthing to know about KNN:
 	1. It is simple to implement and mostly used for classification.
