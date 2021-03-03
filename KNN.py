@@ -55,7 +55,11 @@ def draw_plot(xs, ys):
 
 def manhattan_distance(point1, point2):
     """ Manhattan Distance """
-    """ distance = sum|xi - yi| """
+    """ 
+    Manhattan Distance is the sum of absolute differences between 
+    points across all the dimensions.
+        distance = ∑i=1:n |Xi − Yi| 
+    """
     return np.sum(np.abs(point1 - point2))
 
 
@@ -65,7 +69,7 @@ def euclidean_distances(point1, point2):
     We usually use Euclidean distance to calculate the nearest
     neighbor. If we have two points (x1, y1) and (x2, y2). 
     The formula for Euclidean distance (d) will be: 
-        distance = sqrt((x1 - x2)² + (y1 - y2)²)
+        distance = sqrt(∑i=1:n (Xi − Yi)²)
    """
     return np.sqrt(np.sum(np.power((point1 - point2), 2)))
 
@@ -75,7 +79,7 @@ def minkowski_distance(point1, point2, p):
     """ 
         Minkowski Distance is the generalized form of Euclidean and 
         Manhattan Distance.
-            ( ∑i=1:n |Xi − Yi|^p )^1/p 
+            distance = ( ∑i=1:n |Xi − Yi|^p )^1/p 
     """
     # equ_part1 = ∑i=1:n |Xi − Yi|^p
     equ_part1 = np.sum(np.power(np.abs(point1 - point2), p))
