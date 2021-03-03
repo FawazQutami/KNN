@@ -70,6 +70,21 @@ def euclidean_distances(point1, point2):
     return np.sqrt(np.sum(np.power((point1 - point2), 2)))
 
 
+def minkowski_distance(point1, point2, p):
+    """ Minkowski Distance """
+    """ 
+        Minkowski Distance is the generalized form of Euclidean and 
+        Manhattan Distance.
+            ( ∑i=1:n |Xi − Yi|^p )^1/p 
+    """
+    # equ_part1 = ∑i=1:n |Xi − Yi|^p
+    equ_part1 = np.sum(np.power(np.abs(point1 - point2), p))
+    # distance = (equ_part1)^1/p
+    distance = np.power(equ_part1, 1 / p)
+
+    return np.round(distance, 3)
+
+
 class KNN:
     """ K Nearest Neighbor Algorithm """
     """ Just to understand the math under the hood """
@@ -77,10 +92,14 @@ class KNN:
     def __init__(self, n_neighbors=3, p=2):
         """ KNN Constructor """
         """
-        K represents the number of the nearest neighbors
-        that we used to classify new data points.
+            K represents the number of the nearest neighbors
+            that we used to classify new data points.
         """
         self.k = n_neighbors
+        """ 
+            When p = 1 --> manhattan_distance
+            When p = 2 --> euclidean_distance
+        """
         self.p = p
 
     def fit(self, x_trn, y_trn):
@@ -97,17 +116,10 @@ class KNN:
     def predict_labels(self, point1):
         """ Predict the common class for a point """
         # Calculate the Euclidean distance
-        distances_list = [self.minkowski_distance(point1, point2)
+        distances_list = [minkowski_distance(point1, point2, self.p)
                           for point2 in self.X_train]
 
-        """
-        Once the distance of a new observation from the points in
-        our training set has been measured, the next step is to
-        pick the closest points.
-        The number of points to be considered is defined by the
-        value of k.
-        """
-        # Return K index of the smallest distances
+        # Return K index of the smallest distances - pick the closest points
         k_index = np.argsort(distances_list)[:self.k]
 
         # VOTING for the outcome:
@@ -117,13 +129,6 @@ class KNN:
         most_common_label = Counter(k_index_labels).most_common(1)
 
         return most_common_label[0][0]
-
-    def n_root(self, value):
-        root_value = 1 / np.float64(self.p)
-        return np.round(np.float64(value) ** np.float64(root_value), 3)
-
-    def minkowski_distance(self, point1, point2):
-        return self.n_root(np.sum(np.power(np.abs(point1 - point2), self.p)))
 
 
 def sklearn_knn(X_train, X_test, y_train, y_test):
